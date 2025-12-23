@@ -1,0 +1,17 @@
+#include "ArgParser.h"
+#include <sstream>
+
+Args ArgParser::parseArgs(const std::string& raw) const {
+    Args result;
+    std::istringstream iss(raw);
+    std::string token;
+
+    if (!(iss >> result.commandName)) {
+        return result; // порожня команда
+    }
+
+    while (iss >> token) {
+        result.positional.push_back(token);
+    }
+    return result;
+}
