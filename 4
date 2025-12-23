@@ -1,0 +1,20 @@
+#pragma once
+#include <vector>
+#include "IRenderer.h"
+#include "Character.h"
+#include <iostream>
+
+class CharacterListRenderer : public IRenderer<std::vector<Character>> {
+public:
+    void render(const std::vector<Character>& value) override {
+        if (value.empty()) {
+            std::cout << "Немає жодного персонажа.\n";
+            return;
+        }
+        for (const auto& c : value) {
+            std::cout << "[" << c.id << "] "
+                      << c.name << " | HP: " << c.health
+                      << " | ATK: " << c.attack << "\n";
+        }
+    }
+};
