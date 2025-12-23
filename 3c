@@ -1,0 +1,7 @@
+#include "CharacterCatalog.h"
+
+void CharacterCatalog::addCharacter(const Character& c) {
+    // Проста реалізація: додаємо як є
+    // Можна додати авто-ID, перевірки тощо
+    const_cast<std::vector<Character>&>(characters).push_back(c);
+}
