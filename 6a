@@ -1,0 +1,15 @@
+#pragma once
+#include <string>
+#include <vector>
+#include "ArgParser.h"
+#include "ICommandStrategy.h"
+
+class CLI {
+public:
+    void useStrategy(ICommandStrategy* strategy);
+    void execCommand(const std::string& rawCommand);
+
+private:
+    ArgParser _parser;
+    std::vector<ICommandStrategy*> _strategies;
+};
