@@ -1,0 +1,19 @@
+#pragma once
+#include "ICommandStrategy.h"
+#include "CharacterCatalog.h"
+#include "CharacterListRenderer.h"
+
+class CharacterStrategy : public ICommandStrategy {
+public:
+    CharacterStrategy(CharacterCatalog& catalog);
+
+    bool canHandle(const std::string& commandName) const override;
+    void execCommand(const Args& args) override;
+
+private:
+    CharacterCatalog& _catalog;
+    CharacterListRenderer _listRenderer;
+
+    void handleList();
+    void handleCreate();
+};
