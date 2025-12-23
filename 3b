@@ -1,0 +1,12 @@
+#pragma once
+#include <vector>
+#include "Character.h"
+
+class CharacterCatalog {
+public:
+    const std::vector<Character>& getAll() const { return characters; }
+    void addCharacter(const Character& c);
+
+private:
+    std::vector<Character> characters;
+};
