@@ -1,0 +1,10 @@
+#pragma once
+#include <string>
+#include "Args.h"
+
+class ICommandStrategy {
+public:
+    virtual ~ICommandStrategy() = default;
+    virtual bool canHandle(const std::string& commandName) const = 0;
+    virtual void execCommand(const Args& args) = 0;
+};
