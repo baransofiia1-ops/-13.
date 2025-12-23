@@ -1,0 +1,22 @@
+#include "CLI.h"
+#include <iostream>
+
+void CLI::useStrategy(ICommandStrategy* strategy) {
+    _strategies.push_back(strategy);
+}
+
+void CLI::execCommand(const std::string& rawCommand) {
+    Args args = _parser.parseArgs(rawCommand);
+    if (args.commandName.empty()) {
+        return;
+    }
+
+    for (auto* strat : _strategies) {
+        if (strat->canHandle(args.commandName)) {
+            strat->execCommand(args);
+            return;
+        }
+    }
+
+    std::cout << "Невідома команда: " << args.commandName << "\n";
+}
