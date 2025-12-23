@@ -1,0 +1,30 @@
+#include <iostream>
+#include "CLI.h"
+#include "CharacterCatalog.h"
+#include "CharacterStrategy.h"
+
+int main() {
+    CharacterCatalog catalog;
+    CharacterStrategy charStrat(catalog);
+
+    CLI cli;
+    cli.useStrategy(&charStrat);
+
+    std::cout << "Каталог персонажів (CLI)\n";
+    std::cout << "Доступні команди: list, create, exit\n";
+
+    std::string line;
+    while (true) {
+        std::cout << "> ";
+        if (!std::getline(std::cin, line)) {
+            break;
+        }
+        if (line == "exit") {
+            break;
+        }
+        cli.execCommand(line);
+    }
+
+    std::cout << "До побачення!\n";
+    return 0;
+}
