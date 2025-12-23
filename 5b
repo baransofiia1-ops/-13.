@@ -1,0 +1,40 @@
+#include "CharacterStrategy.h"
+#include <iostream>
+
+CharacterStrategy::CharacterStrategy(CharacterCatalog& catalog)
+    : _catalog(catalog) {}
+
+bool CharacterStrategy::canHandle(const std::string& commandName) const {
+    return commandName == "list" || commandName == "create";
+}
+
+void CharacterStrategy::execCommand(const Args& args) {
+    if (args.commandName == "list") {
+        handleList();
+    } else if (args.commandName == "create") {
+        handleCreate();
+    } else {
+        std::cout << "Невідома команда для CharacterStrategy.\n";
+    }
+}
+
+void CharacterStrategy::handleList() {
+    _listRenderer.render(_catalog.getAll());
+}
+
+void CharacterStrategy::handleCreate() {
+    Character c;
+    c.id = static_cast<int>(_catalog.getAll().size()) + 1;
+
+    std::cout << "Введіть ім'я персонажа: ";
+    std::getline(std::cin >> std::ws, c.name);
+
+    std::cout << "HP: ";
+    std::cin >> c.health;
+
+    std::cout << "ATK: ";
+    std::cin >> c.attack;
+
+    _catalog.addCharacter(c);
+    std::cout << "Персонажа додано!\n";
+}
