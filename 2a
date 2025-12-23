@@ -1,0 +1,8 @@
+#pragma once
+
+template<typename T>
+class IRenderer {
+public:
+    virtual ~IRenderer() = default;
+    virtual void render(const T& value) = 0;
+};
